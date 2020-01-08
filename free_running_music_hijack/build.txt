@@ -1,0 +1,2 @@
+
+i686-w64-mingw32-gcc -shared -o DSOUND.dll dll.c exports.def -lWs2_32 -lBcrypt

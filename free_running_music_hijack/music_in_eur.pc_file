@@ -1,0 +1,27 @@
+Music tracks is in Eur.pc
+Encoded (Encrypted ?) using a special algorithm
+Can be decoded, use music_extractor.c
+
+these are the offsets in eur.pc for the music
+
+0bf95b28 -> 1 (Martin Iveson - Foolish)
+03158958 -> 2 (Evil Nine - Happy Ending)
+075f28b0 -> 3 (Martin Iveson - Jump)
+05266ca8 -> 4 (Mr Scruff - Champion Nibble)
+0b755b28 -> 5 (Martin Iveson - Mustard 9)
+00e52830 -> 6 (Zongamin - Spiral)
+0dbdccc8 -> 7 (Martin Iveson - Zen)
+05a5cca8 -> 8 (EL-P - Constellation)
+07d018f0 -> 9 (Martin Iveson - Jungle Tech)
+03c5f758 -> 10 (Furry Phreaks - Paw Power)
+0af74558 -> 11 (Martin Iveson - Hot Beez)
+087047f0 -> 12 (Martin Iveson - Whodini Boyz)
+0d2c3648 -> 13 (Martin Iveson - Slo Mo)
+02300230 -> 14 (Clyde - Broken Slang)
+064be5a8 -> 15 (Martin Iveson - Breakin' Techno)
+0c54df48 -> 16 (Martin Iveson - Free Thoughts)
+0a7dfa70 -> 17 (Martin Iveson - Breakin')
+01768430 -> 18 (Wagon Christ - Chri Chana)
+0cb95648 -> 19 (Martin Iveson - Midnight Flight)
+091e9a70 -> 20 (Martin Iveson - 5th Avenue)
+06bb4470 -> 21 (Martin Iveson - Jump Street Dub)

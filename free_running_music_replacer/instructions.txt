@@ -1,0 +1,36 @@
+Create a new folder in the game's folder, And then place your music track in that folder
+name the file [number].raw to replace these tracks
+
+1 -> (Martin Iveson - Foolish)
+2 -> (Evil Nine - Happy Ending)
+3 -> (Martin Iveson - Jump)
+4 -> (Mr Scruff - Champion Nibble)
+5 -> (Martin Iveson - Mustard 9)
+6 -> (Zongamin - Spiral)
+7 -> (Martin Iveson - Zen)
+8 -> (EL-P - Constellation)
+9 -> (Martin Iveson - Jungle Tech)
+10 -> (Furry Phreaks - Paw Power)
+11 -> Martin Iveson - Hot Beez
+12 -> Martin Iveson - Whodini Boyz
+13 -> Martin Iveson - Slo Mo
+14 -> Clyde - Broken Slang
+15 -> Martin Iveson - Breakin' Techno
+16 -> (Martin Iveson - Free Thoughts)
+17 -> (Martin Iveson - Breakin')
+18 -> (Wagon Christ - Chri Chana)
+19 -> (Martin Iveson - Midnight Flight)
+20 -> (Martin Iveson - 5th Avenue)
+21 -> (Martin Iveson - Jump Street Dub)
+
+ex: to replace (Martin Iveson - Foolish), place your song named 1.raw inside the Music folder
+
+Note: this only replaces music, is does not have custom controlls (play, pause, next), if you want that, see
+https://github.com/baselsayeh/free_running_music_hijack
+
+the music must have the following settings (convert with audacity or ffmpeg)
+16-bit Signed PCM Little endian
+2 channels
+44100 sample rate
+Raw (header-less)
+English file name and path
