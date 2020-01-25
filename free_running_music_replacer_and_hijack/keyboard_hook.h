@@ -151,45 +151,55 @@
 
 /////////////////
 
-unsigned char m_keyboardState[256] = {0};
-int keyboard_updated = 0;
+volatile unsigned char m_keyboardState[256] = {0};
+volatile int keyboard_updated = 0;
 int prev_keyboardState[16] = {0};
 
 
 void HookCallback() {
-	if(prev_keyboardState[0] != m_keyboardState[DIK_PLAYPAUSE]) {
-		if (m_keyboardState[DIK_PLAYPAUSE] & 0x80) {
+	if(prev_keyboardState[0] != m_keyboardState[DIK_DELETE]) {
+		if (m_keyboardState[DIK_DELETE] & 0x80) {
 			if (music_pause == 1)
 				music_pause = 0;
 			else if (music_pause == 0)
 				music_pause = 1;
 			printf("Pause: %d\n", music_pause);
 		}
-		prev_keyboardState[0] = m_keyboardState[DIK_PLAYPAUSE];
+		prev_keyboardState[0] = m_keyboardState[DIK_DELETE];
 	} else if(prev_keyboardState[1] != m_keyboardState[DIK_INSERT]) {
 		if (m_keyboardState[DIK_INSERT] & 0x80) {
-			music_can_handle = 2;
-
-			printf("Force music\n");
+			if (music_can_handle == 0) {
+				//music_can_handle = 2;
+				set_music_can_handle_from_keyboard(2);
+				printf("Force music\n");
+			} else {
+				//music_can_handle = 0;
+				set_music_can_handle_from_keyboard(0);
+				printf("Force music STOP\n");
+			}
 		}
 
 		prev_keyboardState[1] = m_keyboardState[DIK_INSERT];
-	} else if(prev_keyboardState[2] != m_keyboardState[DIK_MEDIASTOP]) {
-		if (m_keyboardState[DIK_MEDIASTOP] & 0x80) {
-			music_can_handle = 0;
+	/*} else if(prev_keyboardState[2] != m_keyboardState[DIK_BACK]) {
+		if (m_keyboardState[DIK_BACK] & 0x80) {
+			//music_can_handle = 0;
+			set_music_can_handle_from_keyboard(0);
 
 			printf("Force music STOP\n");
 		}
 
-		prev_keyboardState[2] = m_keyboardState[DIK_MEDIASTOP];
-	} else if(prev_keyboardState[3] != m_keyboardState[DIK_NEXTTRACK]) {
-		if (m_keyboardState[DIK_NEXTTRACK] & 0x80) {
+		prev_keyboardState[2] = m_keyboardState[DIK_BACK];
+*/
+	} else if(prev_keyboardState[3] != m_keyboardState[DIK_EQUALS]) {
+		if (m_keyboardState[DIK_EQUALS] & 0x80) {
 			int prev_music_pause = music_pause;
 			music_pause = 1;
 			music_finish_go_to_next();
 			music_pause = prev_music_pause;
+
+			printf("Music go to next song\n");
 		}
-		prev_keyboardState[3] = m_keyboardState[DIK_NEXTTRACK];
+		prev_keyboardState[3] = m_keyboardState[DIK_EQUALS];
 	}
 }
 
@@ -198,6 +208,8 @@ DWORD WINAPI monitor_keyboard_thread(void* data) {
 		if (keyboard_updated == 1) {
 			HookCallback();
 			keyboard_updated = 0;
+			//usleep(10e3);
+			Sleep(32); //31 times in one second
 		}
 	}
 }

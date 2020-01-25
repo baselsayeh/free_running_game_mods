@@ -1,3 +1,5 @@
+for build commands, see build.txt (assuming using cygwin)
+
 Create a new folder in the game's folder, And then place your music track in that folder
 name the file [number].raw to replace these tracks
 
@@ -22,13 +24,16 @@ name the file [number].raw to replace these tracks
 19 -> (Martin Iveson - Midnight Flight)
 20 -> (Martin Iveson - 5th Avenue)
 21 -> (Martin Iveson - Jump Street Dub)
+22 -> (Martin Iveson - B Boyz)
+23 -> (Skrum - Akting Up)
+
 
 ex: to replace (Martin Iveson - Foolish), place your song named 1.raw inside the Music folder
 
-Note: this only replaces music, is does not have custom controlls (play, pause, next), if you want that, see
-https://github.com/baselsayeh/free_running_music_hijack
+Note: this can be build to replace music with, or without custom controls
 
 the music must have the following settings (convert with audacity or ffmpeg)
+(using ffmpeg, the command would be: ffmpeg -i INPUT_FILE -f s16le -acodec pcm_s16le -ar 44100 -ac 2 OUTPUT_FILE)
 16-bit Signed PCM Little endian
 2 channels
 44100 sample rate

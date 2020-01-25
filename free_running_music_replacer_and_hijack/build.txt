@@ -1,0 +1,2 @@
+i686-w64-mingw32-gcc -shared -o DSOUND.dll dll.c x86_patch.c exports.def -lWs2_32 -O2
+i686-w64-mingw32-gcc -shared -o DSOUND_MUSIC_HIJACK.dll dll.c x86_patch.c exports.def -lWs2_32 -lBcrypt -DMUSIC_HIJACK -O2
