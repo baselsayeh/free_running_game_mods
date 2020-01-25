@@ -2,7 +2,7 @@ Music tracks is in Eur.pc
 Encoded (Encrypted ?) using a special algorithm
 Can be decoded, use music_extractor.c
 
-these are the offsets in eur.pc for the music
+these are the offsets (in hex) in eur.pc for the music
 
 0bf95b28 -> 1 (Martin Iveson - Foolish)
 03158958 -> 2 (Evil Nine - Happy Ending)
@@ -25,3 +25,5 @@ these are the offsets in eur.pc for the music
 0cb95648 -> 19 (Martin Iveson - Midnight Flight)
 091e9a70 -> 20 (Martin Iveson - 5th Avenue)
 06bb4470 -> 21 (Martin Iveson - Jump Street Dub)
+09d3aa70 -> 22 (Martin Iveson - B Boyz)
+048b7060 -> 23 (Skrum - Akting Up)
