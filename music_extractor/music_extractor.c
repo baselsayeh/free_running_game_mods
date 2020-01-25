@@ -208,7 +208,7 @@ void decrypt(unsigned char *from, unsigned short *to, int32_t len, struct initia
 	printf("These values is used if there is need to decode a several chunks\n%d %d %d %d\n", ebp, edi, ecx, esi);
 }
 
-int file_to_mem(char *fname, unsigned char **out, unsigned long *len) {
+int file_to_mem(char *fname, uint32_t offset, uint32_t length, unsigned char **out, unsigned long *len) {
 	FILE *fp;
 	unsigned char *file_malloc;
 	long file_size;
@@ -220,21 +220,31 @@ int file_to_mem(char *fname, unsigned char **out, unsigned long *len) {
 	fseek(fp, 0, SEEK_END);
 	file_size = ftell(fp);
 	fseek(fp, 0, SEEK_SET); /* same as rewind(f); */
+
+	if (length != 0) {
+		if ((offset + length) > file_size)
+			return -2;
+
+		file_size = length;
+	}
+
 	if (file_size == 0 || file_size > 0x2000000) { //32 meg
 		fclose(fp);
-		return -2;
+		return -3;
 	}
+
+	fseek(fp, offset, SEEK_SET);
 
 	file_malloc = (unsigned char *)malloc(file_size + 1);
 	if (file_malloc == NULL) {
 		fclose(fp);
-		return -3;
+		return -4;
 	}
 
 	if (fread(file_malloc, 1, file_size, fp) != file_size) {
 		fclose(fp);
 		free(file_malloc);
-		return -3;
+		return -5;
 	}
 
 	fclose(fp);
@@ -251,22 +261,27 @@ int main(int argc, char *argv[]) {
 	short *out_dec;
 	int ret;
 	char *out_as_char;
-	struct initial_values init_vals;
+	struct initial_values init_vals = {0, 0, 0, 0};
+	uint32_t needed_offset = 0;
+	uint32_t needed_length = 0;
 
-	if (argc != 3 && argc != 7) {
-		printf("Usage: %s input_file output_file\nOr: %s input_file output_file 4values", argv[0]);
+	if (argc != 5 && argc != 9) {
+		printf("Usage: %s input_file output_file offset length\nOr: %s input_file output_file offset length 4values\n", argv[0], argv[0]);
 		return 1;
 	}
 
+	sscanf(argv[3], "%d", &needed_offset);
+	sscanf(argv[4], "%d", &needed_length);
+
 	//printf("Args: %d", argc);
-	if (argc == 7) {
-		sscanf(argv[3], "%d", &(init_vals.ebp));
-		sscanf(argv[4], "%d", &(init_vals.edi));
-		sscanf(argv[5], "%d", &(init_vals.ecx));
-		sscanf(argv[6], "%d", &(init_vals.esi));
+	if (argc == 9) {
+		sscanf(argv[5], "%d", &(init_vals.ebp));
+		sscanf(argv[6], "%d", &(init_vals.edi));
+		sscanf(argv[7], "%d", &(init_vals.ecx));
+		sscanf(argv[8], "%d", &(init_vals.esi));
 	}
 
-	ret = file_to_mem(argv[1], &file_in_mem, &file_length);
+	ret = file_to_mem(argv[1], needed_offset, needed_length, &file_in_mem, &file_length);
 	if (ret != 0) {
 		printf("Error reading file: %d\n", ret);
 		return 1;
